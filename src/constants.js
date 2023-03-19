@@ -4,7 +4,6 @@ import {Coin} from './Coin.js';
 
 export const scale = 15;  
 export const maxStep = 0.05;
-export const wobbleSpeed = 8, wobbleDist = 0.07;
 export const playerXSpeed = 10;
 export const gravity = 30;
 export const jumpSpeed = 17;

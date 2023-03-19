@@ -81,7 +81,7 @@ export class Level {
         }
     }
     playerTouched(type, actor) {
-        if (type == "lava" && this.status == null) {
+        if (type == "lava" || type == "Lava" && this.status == null) {
             this.status = "lost";
             this.finishDelay = 1;
         } else if (type == "coin") {

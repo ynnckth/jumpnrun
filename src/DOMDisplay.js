@@ -48,16 +48,16 @@ export class DOMDisplay {
     }
     // clear it later
     scrollPlayerIntoView() {
-        var width = this.wrap.clientWidth;
-        var height = this.wrap.clientHeight;
-        var margin = width / 3;
+        const width = this.wrap.clientWidth;
+        const height = this.wrap.clientHeight;
+        const margin = width / 3;
 
         // The viewport
-        var left = this.wrap.scrollLeft, right = left + width;
-        var top = this.wrap.scrollTop, bottom = top + height;
+        const left = this.wrap.scrollLeft, right = left + width;
+        const top = this.wrap.scrollTop, bottom = top + height;
 
-        var player = this.level.player;
-        var center = player.pos.plus(player.size.times(0.5))
+        const player = this.level.player;
+        const center = player.pos.plus(player.size.times(0.5))
             .times(scale);
 
         if (center.x < left + margin)

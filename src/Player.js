@@ -47,8 +47,9 @@ export class Player {
         this.moveY(step, level, keys);
 
         const otherActor = level.actorAt(this);
-        if (otherActor)
+        if (otherActor) {
             level.playerTouched(otherActor.type, otherActor);
+        }
 
         // Losing animation
         if (level.status == "lost") {
