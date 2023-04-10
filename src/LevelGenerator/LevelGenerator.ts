@@ -1,12 +1,9 @@
 import { stringLetterToGridLetterMappings } from "./stringLetterToGridLetterMappings";
 
 class LevelGenerator {
-  getMapGridForSingleLetter(inputLetter: string) {
-    return stringLetterToGridLetterMappings[inputLetter];
-  }
-
+  // TODO: add map baseline
   getMapGridForString(inputString: string): string[] {
-    const letterGrids = [...inputString].map((letter) => this.getMapGridForSingleLetter(letter));
+    const letterGrids = [...inputString.toUpperCase()].map((letter) => this.getMapGridForSingleLetter(letter));
     const mapGrid = ["", "", "", "", ""];
     letterGrids.forEach((letterGrid) => {
       letterGrid.forEach((_, letterRowIdx) => {
@@ -14,6 +11,10 @@ class LevelGenerator {
       });
     });
     return mapGrid;
+  }
+
+  private getMapGridForSingleLetter(inputLetter: string) {
+    return stringLetterToGridLetterMappings[inputLetter];
   }
 }
 export default LevelGenerator;
