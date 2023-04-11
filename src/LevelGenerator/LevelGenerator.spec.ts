@@ -25,7 +25,9 @@ describe(LevelGenerator.name, () => {
         "  oooo    oooo    oooo    oooo     oo             oooo     oo     ooo      oo     oooo    o  o    oooo     oo   ",
         "  o  o    o  o    o       o        oo             o  o     oo     o  o     oo     o  o    o  o    o  o     oo   ",
         "@ o  o    o  o    o       o        oo             oooo     oo     o  o     oo     o  o    o o     o  o     oo   ",
-        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "                                        x!!!!!!x                                                                ",
+        "                                        xxxxxxxx                                                                ",
       ]);
     }
   );
@@ -49,7 +51,9 @@ describe(LevelGenerator.name, () => {
       "   oo           ",
       "   oo           ",
       "@  oo           ",
-      "xxxxxxxxxxxxxxxx",
+      "xxxxxxxxx      x",
+      "        x!!!!!!x",
+      "        xxxxxxxx",
     ]);
   });
 });
