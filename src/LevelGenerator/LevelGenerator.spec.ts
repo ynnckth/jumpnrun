@@ -10,6 +10,16 @@ describe(LevelGenerator.name, () => {
       const mapGrid = levelGenerator.generateLevelFromString(inputString);
 
       expect(mapGrid).toStrictEqual([
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
+        "                                                                                                                ",
         "  o  o     oo     oooo    oooo   o    o           ooo      oo     ooo    oooooo   o  o    ooo      oo    o    o ",
         "  o  o    o  o    o  o    o  o    o  o            o  o            o  o     oo     o  o    o  o    o  o    o  o  ",
         "  oooo    oooo    oooo    oooo     oo             oooo     oo     ooo      oo     oooo    o  o    oooo     oo   ",
@@ -24,6 +34,16 @@ describe(LevelGenerator.name, () => {
     const mapGrid = levelGenerator.generateLevelFromString("Y2");
 
     expect(mapGrid).toStrictEqual([
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
+      "                ",
       " o    o         ",
       "  o  o          ",
       "   oo           ",
