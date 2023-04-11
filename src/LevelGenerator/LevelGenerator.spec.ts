@@ -24,7 +24,7 @@ describe(LevelGenerator.name, () => {
         "  o  o    o  o    o  o    o  o    o  o            o  o            o  o     oo     o  o    o  o    o  o    o  o  ",
         "  oooo    oooo    oooo    oooo     oo             oooo     oo     ooo      oo     oooo    o  o    oooo     oo   ",
         "  o  o    o  o    o       o        oo             o  o     oo     o  o     oo     o  o    o  o    o  o     oo   ",
-        "@ o  o    o  o    o       o        oo             oooo     oo     o  o     oo     o  o    o o     o  o     oo   ",
+        "@ o  o    o  o    o       o        oo             oooo     oo     o  o     oo     o  o    ooo     o  o     oo   ",
         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "                                        x!!!!!!x                                                                ",
         "                                        xxxxxxxx                                                                ",

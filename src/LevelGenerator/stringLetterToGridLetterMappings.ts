@@ -69,7 +69,7 @@ export const stringLetterToGridLetterMappings: Record<string, string[]> = {
       "  o  o  ",
       "  o  o  ",
       "  o  o  ",
-      "  o o   "
+      "  ooo   "
     ],
   // prettier-ignore
   " ": [
