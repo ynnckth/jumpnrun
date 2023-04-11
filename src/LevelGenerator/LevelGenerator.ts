@@ -5,7 +5,7 @@ class LevelGenerator {
   private readonly GROUND_CHAR = "x";
 
   // TODO: Adjust level height
-  // TODO: Add lava between spaces of words
+  // TODO: Add lava on the ground between spaces of words
   generateLevelFromString(inputString: string): string[] {
     const concatenatedLetterGrids = this.concatLetterGrids(inputString);
 
@@ -31,7 +31,11 @@ class LevelGenerator {
   }
 
   private getMapGridForSingleLetter(inputLetter: string) {
-    return stringLetterToGridLetterMappings[inputLetter];
+    const letterGrid = stringLetterToGridLetterMappings[inputLetter];
+    if (!letterGrid) {
+      return stringLetterToGridLetterMappings[" "];
+    }
+    return letterGrid;
   }
 }
 export default LevelGenerator;

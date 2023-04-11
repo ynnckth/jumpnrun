@@ -19,4 +19,17 @@ describe(LevelGenerator.name, () => {
       ]);
     }
   );
+
+  it("should use letter grid for space character given unknown letter", () => {
+    const mapGrid = levelGenerator.generateLevelFromString("Y2");
+
+    expect(mapGrid).toStrictEqual([
+      " o    o         ",
+      "  o  o          ",
+      "   oo           ",
+      "   oo           ",
+      "@  oo           ",
+      "xxxxxxxxxxxxxxxx",
+    ]);
+  });
 });

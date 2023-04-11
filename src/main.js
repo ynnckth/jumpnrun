@@ -6,7 +6,7 @@ const trackKeys = (arrowKeyCodes) => {
   const pressed = Object.create(null);
   const handler = (event) => {
     if (arrowKeyCodes.hasOwnProperty(event.keyCode)) {
-      const down = event.type == "keydown";
+      const down = event.type === "keydown";
       pressed[arrowKeyCodes[event.keyCode]] = down;
       event.preventDefault();
     }
@@ -48,7 +48,7 @@ const runLevel = (level, Display, andThen) => {
 const runGame = (levels, Display) => {
   const startLevel = (n) => {
     runLevel(new Level(levels[n]), Display, (status) => {
-      if (status == "lost") startLevel(n);
+      if (status === "lost") startLevel(n);
       else if (n < levels.length - 1) startLevel(n + 1);
       else alert("You win!");
     });

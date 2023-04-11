@@ -79,21 +79,148 @@ export const stringLetterToGridLetterMappings: Record<string, string[]> = {
         "        ",
         "        "
     ],
-  // TODO: C
-  // TODO: E
-  // TODO: F
-  // TODO: G
-  // TODO: J
-  // TODO: K
-  // TODO: L
-  // TODO: M
-  // TODO: N
-  // TODO: O
-  // TODO: Q
-  // TODO: S
-  // TODO: U
-  // TODO: V
-  // TODO: W
-  // TODO: X
-  // TODO: Z
+  // prettier-ignore
+  "-": [
+        "        ",
+        "        ",
+        "        ",
+        "        ",
+        "        "
+    ],
+  // prettier-ignore
+  "C": [
+        "  oooo  ",
+        "  o     ",
+        "  o     ",
+        "  o     ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "E": [
+        "  oooo  ",
+        "  o     ",
+        "  ooo   ",
+        "  o     ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "F": [
+        "  oooo  ",
+        "  o     ",
+        "  ooo   ",
+        "  o     ",
+        "  o     "
+    ],
+  // prettier-ignore
+  "G": [
+        "  oooo  ",
+        "  o     ",
+        "  o oo  ",
+        "  o  o  ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "J": [
+        "  ooooo ",
+        "     oo ",
+        "     oo ",
+        "     oo ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "K": [
+        "  o  o  ",
+        "  o o   ",
+        "  oo    ",
+        "  o o   ",
+        "  o  o  "
+    ],
+  // prettier-ignore
+  "L": [
+        "  o     ",
+        "  o     ",
+        "  o     ",
+        "  o     ",
+        "  ooooo "
+    ],
+  // prettier-ignore
+  "M": [
+        " oo  oo ",
+        " o oo o ",
+        " o oo o ",
+        " o    o ",
+        " o    o "
+    ],
+  // prettier-ignore
+  "N": [
+        " o    o ",
+        " oo   o ",
+        " o o  o ",
+        " o  o o ",
+        " o   oo "
+    ],
+  // prettier-ignore
+  "O": [
+        "  oooo  ",
+        " o    o ",
+        " o    o ",
+        " o    o ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "Q": [
+        "  oooo  ",
+        " o    o ",
+        " o    o ",
+        " o   oo ",
+        "  oooooo"
+    ],
+  // prettier-ignore
+  "S": [
+        "  oooo  ",
+        "  o     ",
+        "  oooo  ",
+        "     o  ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "U": [
+        " o    o ",
+        " o    o ",
+        " o    o ",
+        " o    o ",
+        "  oooo  "
+    ],
+  // prettier-ignore
+  "V": [
+        " o    o ",
+        " o    o ",
+        " o    o ",
+        "  o  o  ",
+        "   oo   "
+    ],
+  // prettier-ignore
+  "W": [
+        " o    o ",
+        " o    o ",
+        " o oo o ",
+        " o oo o ",
+        " oo  oo "
+    ],
+  // prettier-ignore
+  "X": [
+        " o    o ",
+        "  o  o  ",
+        "   oo   ",
+        "  o  o  ",
+        " o    o "
+    ],
+  // prettier-ignore
+  "Z": [
+        "  ooooo ",
+        "     o  ",
+        "    o   ",
+        "   o    ",
+        "  ooooo "
+    ],
 };
