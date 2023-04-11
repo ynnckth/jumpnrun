@@ -33,14 +33,12 @@ class LevelGenerator {
     return mapGrid;
   }
 
-  // TODO: add dripping lava from the top (add top padding per character instead of overall)
   private getMapGridForSingleLetter(inputLetter: string) {
     let letterGrid = stringLetterToGridLetterMappings[inputLetter];
     if (!letterGrid || inputLetter === " " || inputLetter === "-") {
       const letterGridCopy = [...stringLetterToGridLetterMappings[" "]];
       this.appendLavaCrack(letterGridCopy);
-      this.prependEmptyRowsOnTopOfLetter(letterGridCopy);
-      this.prependDrippingLava(letterGridCopy);
+      this.prependDrippingLavaOnTopOfLetter(letterGridCopy);
       return letterGridCopy;
     }
     const letterGridCopy = [...letterGrid];
@@ -49,10 +47,10 @@ class LevelGenerator {
     return letterGridCopy;
   }
 
-  private appendLavaCrack(letterGridCopy: string[]) {
-    letterGridCopy.push("x      x");
-    letterGridCopy.push("x!!!!!!x");
-    letterGridCopy.push("xxxxxxxx");
+  private appendLavaCrack(letterGrid: string[]) {
+    letterGrid.push("x      x");
+    letterGrid.push("x!!!!!!x");
+    letterGrid.push("xxxxxxxx");
   }
 
   private appendGroundAndBelowGroundRows(letterGrid: string[]) {
@@ -68,8 +66,17 @@ class LevelGenerator {
     }
   }
 
-  private prependDrippingLava(letterGrid: string[]) {
-    // TODO: Implement
+  private prependDrippingLavaOnTopOfLetter(letterGrid: string[]) {
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("   xvx  ");
+    letterGrid.unshift("  xx!xx ");
+    letterGrid.unshift("  x!!!x ");
+    letterGrid.unshift("  xx!xx ");
+    letterGrid.unshift("   xxx  ");
+    letterGrid.unshift("        ");
   }
 }
 export default LevelGenerator;
