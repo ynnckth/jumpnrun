@@ -1,7 +1,11 @@
+html, body {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
 body {
 	background: #222;
 	height: 100%;
-	overflow-y: hidden;
+	position: relative;
 }
 h2 {
 	color: #666;
