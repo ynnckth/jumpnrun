@@ -2,6 +2,7 @@ import { Player } from "./Player.js";
 import { Lava } from "./Lava.js";
 import { Coin } from "./Coin.js";
 import LevelGenerator from "./LevelGenerator/LevelGenerator";
+import { inputString } from "./UrlQueryParams.ts";
 
 export const scale = 15;
 export const maxStep = 0.05;
@@ -21,11 +22,6 @@ export const actorchars = {
 export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };
 
 const levelGenerator = new LevelGenerator();
-
-const urlQueryParams = new Proxy(new URLSearchParams(window.location.search), {
-  get: (searchParams, prop) => searchParams.get(prop),
-});
-const inputString = urlQueryParams.message ?? "Awesome";
 
 export const LEVELS = [levelGenerator.generateLevelFromString(inputString)];
 

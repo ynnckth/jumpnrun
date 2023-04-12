@@ -1,6 +1,7 @@
 import { arrowKeyCodes, LEVELS } from "./constants.js";
 import { Level } from "./Level.js";
 import { DOMDisplay } from "./DOMDisplay.js";
+import { winMessage } from "./UrlQueryParams.ts";
 
 const trackKeys = (arrowKeyCodes) => {
   const pressed = Object.create(null);
@@ -35,11 +36,11 @@ const trackKeys = (arrowKeyCodes) => {
         pressed["up"] = true;
       }
     }
+    xDown = null;
+    yDown = null;
   };
 
   const handleTouchEnd = () => {
-    xDown = null;
-    yDown = null;
     pressed["right"] = false;
     pressed["left"] = false;
     pressed["up"] = false;
@@ -93,7 +94,7 @@ const runGame = (levels, Display) => {
     runLevel(new Level(levels[n]), Display, (status) => {
       if (status === "lost") startLevel(n);
       else if (n < levels.length - 1) startLevel(n + 1);
-      else alert("You win!");
+      else alert(winMessage);
     });
   };
   startLevel(0);
