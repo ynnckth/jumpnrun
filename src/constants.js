@@ -23,7 +23,7 @@ export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };
 const levelGenerator = new LevelGenerator();
 
 const urlPathFractions = window.location.pathname.split("/");
-export const LEVELS = [levelGenerator.generateLevelFromString(urlPathFractions[1] ?? "")];
+export const LEVELS = [levelGenerator.generateLevelFromString(urlPathFractions[2] ?? "")];
 
 /*
 export const LEVELS = [
