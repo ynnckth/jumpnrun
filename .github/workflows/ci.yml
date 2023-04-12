@@ -22,8 +22,13 @@ jobs:
       - name: Build ⚒️
         run: npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          folder: dist
-          token: ${{ secrets.ACTION_GH_PAGES_DEPLOYMENT_TOKEN }}
+          # Upload dist repository
+          path: './dist'
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v1
