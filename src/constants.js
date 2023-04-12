@@ -22,8 +22,12 @@ export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };
 
 const levelGenerator = new LevelGenerator();
 
-const urlPathFractions = window.location.pathname.split("/");
-export const LEVELS = [levelGenerator.generateLevelFromString(urlPathFractions[2] ?? "")];
+const urlQueryParams = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+const inputString = urlQueryParams.message ?? "Awesome";
+
+export const LEVELS = [levelGenerator.generateLevelFromString(inputString)];
 
 /*
 export const LEVELS = [
