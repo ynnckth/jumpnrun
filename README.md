@@ -11,3 +11,6 @@ Simply append them to the URL, for example as such:
 ```
 https://ynnckth.github.io/jumpnrun/?message=hello-world&won=you%20win
 ```
+
+Use in conjunction with a QR-code generator like:
+> https://www.qr-code-generator.com/

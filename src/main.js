@@ -18,9 +18,7 @@ const trackKeys = (arrowKeyCodes) => {
     yDown = firstTouch.clientY;
   };
 
-  // TODO: enhance switching swipe direction while moving (before touchend)
   const handleTouchMove = (event) => {
-    if (!xDown || !yDown) return;
     xUp = event.touches[0].clientX;
     yUp = event.touches[0].clientY;
     xDiff = xDown - xUp;
@@ -28,12 +26,17 @@ const trackKeys = (arrowKeyCodes) => {
     if (Math.abs(xDiff) > Math.abs(yDiff)) {
       if (xDiff > 0) {
         pressed["left"] = true;
+        pressed["right"] = false;
+        return;
       } else {
         pressed["right"] = true;
+        pressed["left"] = false;
+        return;
       }
     } else {
       if (yDiff > 0) {
         pressed["up"] = true;
+        return;
       }
     }
     xDown = null;
