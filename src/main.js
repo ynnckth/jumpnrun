@@ -3,6 +3,7 @@ import { Level } from "./Level.js";
 import { DOMDisplay } from "./DOMDisplay.js";
 import { winMessage } from "./UrlQueryParams.ts";
 
+// TODO: Improve touch controls (for example switching directions mid-air)
 const trackKeys = (arrowKeyCodes) => {
   const pressed = Object.create(null);
   let xDown = null;
@@ -23,21 +24,18 @@ const trackKeys = (arrowKeyCodes) => {
     yUp = event.touches[0].clientY;
     xDiff = xDown - xUp;
     yDiff = yDown - yUp;
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-      if (xDiff > 0) {
-        pressed["left"] = true;
-        pressed["right"] = false;
-        return;
-      } else {
-        pressed["right"] = true;
-        pressed["left"] = false;
-        return;
-      }
-    } else {
-      if (yDiff > 0) {
-        pressed["up"] = true;
-        return;
-      }
+    if (yDiff > 0) {
+      pressed["up"] = true;
+      return;
+    }
+    if (xDiff > 0) {
+      pressed["left"] = true;
+      pressed["right"] = false;
+      return;
+    } else if (xDiff < 1) {
+      pressed["right"] = true;
+      pressed["left"] = false;
+      return;
     }
     xDown = null;
     yDown = null;
