@@ -9,11 +9,6 @@ touchDetector.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 
 const trackKeys = (arrowKeyCodes) => {
   const pressed = Object.create(null);
-  const handleTouchEnd = () => {
-    pressed["right"] = false;
-    pressed["left"] = false;
-    pressed["up"] = false;
-  };
 
   const handleKeyPress = (event) => {
     if (arrowKeyCodes.hasOwnProperty(event.keyCode)) {
@@ -22,7 +17,9 @@ const trackKeys = (arrowKeyCodes) => {
     }
   };
 
-  const handleSwipe = (event, pressed) => {
+  // TODO: instead of manually checking angles, use panup, pandown, panright, panleft hammerjs events
+  //  https://hammerjs.github.io/recognizer-pan/
+  const handleSwipe = (event) => {
     if (event.angle > -155 && event.angle < -90) {
       pressed["up"] = true;
       pressed["left"] = true;
@@ -43,10 +40,16 @@ const trackKeys = (arrowKeyCodes) => {
     event.preventDefault();
   };
 
+  const handleSwipeEnd = () => {
+    pressed["right"] = false;
+    pressed["left"] = false;
+    pressed["up"] = false;
+  };
+
   addEventListener("keydown", handleKeyPress);
   addEventListener("keyup", handleKeyPress);
-  touchDetector.on("pan", (event) => handleSwipe(event, pressed));
-  addEventListener("touchend", handleTouchEnd);
+  touchDetector.on("pan", handleSwipe);
+  touchDetector.on("panend", handleSwipeEnd);
   return pressed;
 };
 
