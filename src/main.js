@@ -2,61 +2,50 @@ import { arrowKeyCodes, LEVELS } from "./constants.js";
 import { Level } from "./Level.js";
 import { DOMDisplay } from "./DOMDisplay.js";
 import { winMessage } from "./UrlQueryParams.ts";
+import Hammer from "hammerjs";
 
-// TODO: Improve touch controls (for example switching directions mid-air)
+const touchDetector = new Hammer(document.getElementsByTagName("html")[0]);
+touchDetector.get("pan").set({ direction: Hammer.DIRECTION_ALL });
+
 const trackKeys = (arrowKeyCodes) => {
   const pressed = Object.create(null);
-  let xDown = null;
-  let yDown = null;
-  let xUp = null;
-  let yUp = null;
-  let xDiff = null;
-  let yDiff = null;
-
-  const handleTouchStart = (event) => {
-    const firstTouch = (event.touches || event.originalEvent.touches)[0];
-    xDown = firstTouch.clientX;
-    yDown = firstTouch.clientY;
-  };
-
-  const handleTouchMove = (event) => {
-    xUp = event.touches[0].clientX;
-    yUp = event.touches[0].clientY;
-    xDiff = xDown - xUp;
-    yDiff = yDown - yUp;
-    if (yDiff > 0) {
-      pressed["up"] = true;
-      return;
-    }
-    if (xDiff > 0) {
-      pressed["left"] = true;
-      pressed["right"] = false;
-      return;
-    } else if (xDiff < 1) {
-      pressed["right"] = true;
-      pressed["left"] = false;
-      return;
-    }
-    xDown = null;
-    yDown = null;
-  };
-
   const handleTouchEnd = () => {
     pressed["right"] = false;
     pressed["left"] = false;
     pressed["up"] = false;
   };
 
-  const handler = (event) => {
+  const handleKeyPress = (event) => {
     if (arrowKeyCodes.hasOwnProperty(event.keyCode)) {
       pressed[arrowKeyCodes[event.keyCode]] = event.type === "keydown";
       event.preventDefault();
     }
   };
-  addEventListener("keydown", handler);
-  addEventListener("keyup", handler);
-  addEventListener("touchstart", handleTouchStart);
-  addEventListener("touchmove", handleTouchMove);
+
+  const handleSwipe = (event, pressed) => {
+    if (event.angle > -155 && event.angle < -90) {
+      pressed["up"] = true;
+      pressed["left"] = true;
+      pressed["right"] = false;
+    } else if (event.angle < -155 || (event.angle > 130 && event.angle < 180)) {
+      pressed["left"] = true;
+      pressed["right"] = false;
+      pressed["up"] = false;
+    } else if (event.angle > -20 && event.angle < 30) {
+      pressed["right"] = true;
+      pressed["left"] = false;
+      pressed["up"] = false;
+    } else if (event.angle < -20 && event.angle > -90) {
+      pressed["up"] = true;
+      pressed["right"] = true;
+      pressed["left"] = false;
+    }
+    event.preventDefault();
+  };
+
+  addEventListener("keydown", handleKeyPress);
+  addEventListener("keyup", handleKeyPress);
+  touchDetector.on("pan", (event) => handleSwipe(event, pressed));
   addEventListener("touchend", handleTouchEnd);
   return pressed;
 };
