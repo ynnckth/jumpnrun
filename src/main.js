@@ -5,9 +5,8 @@ import { winMessage } from "./UrlQueryParams.ts";
 import Hammer from "hammerjs";
 
 const touchDetector = new Hammer(document.getElementsByTagName("html")[0]);
-touchDetector.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 
-const trackKeys = (arrowKeyCodes) => {
+const trackDirections = (arrowKeyCodes) => {
   const pressed = Object.create(null);
 
   const handleKeyPress = (event) => {
@@ -15,29 +14,6 @@ const trackKeys = (arrowKeyCodes) => {
       pressed[arrowKeyCodes[event.keyCode]] = event.type === "keydown";
       event.preventDefault();
     }
-  };
-
-  // TODO: instead of manually checking angles, use panup, pandown, panright, panleft hammerjs events
-  //  https://hammerjs.github.io/recognizer-pan/
-  const handleSwipe = (event) => {
-    if (event.angle > -155 && event.angle < -90) {
-      pressed["up"] = true;
-      pressed["left"] = true;
-      pressed["right"] = false;
-    } else if (event.angle < -155 || (event.angle > 130 && event.angle < 180)) {
-      pressed["left"] = true;
-      pressed["right"] = false;
-      pressed["up"] = false;
-    } else if (event.angle > -20 && event.angle < 30) {
-      pressed["right"] = true;
-      pressed["left"] = false;
-      pressed["up"] = false;
-    } else if (event.angle < -20 && event.angle > -90) {
-      pressed["up"] = true;
-      pressed["right"] = true;
-      pressed["left"] = false;
-    }
-    event.preventDefault();
   };
 
   const handleSwipeEnd = () => {
@@ -48,8 +24,18 @@ const trackKeys = (arrowKeyCodes) => {
 
   addEventListener("keydown", handleKeyPress);
   addEventListener("keyup", handleKeyPress);
-  touchDetector.on("pan", handleSwipe);
   touchDetector.on("panend", handleSwipeEnd);
+  touchDetector.on("panup", () => {
+    pressed["up"] = true;
+  });
+  touchDetector.on("panright", () => {
+    pressed["right"] = true;
+    pressed["left"] = false;
+  });
+  touchDetector.on("panleft", () => {
+    pressed["left"] = true;
+    pressed["right"] = false;
+  });
   return pressed;
 };
 
@@ -67,7 +53,7 @@ const runAnimation = (frameFunc) => {
   requestAnimationFrame(frame);
 };
 
-const arrows = trackKeys(arrowKeyCodes);
+const arrows = trackDirections(arrowKeyCodes);
 
 const runLevel = (level, Display, andThen) => {
   const display = new Display(document.body, level);
