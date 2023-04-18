@@ -1,23 +1,51 @@
 import { stringLetterToGridLetterMappings } from "./stringLetterToGridLetterMappings";
 
 class LevelGenerator {
-  private readonly PLAYER_CHAR = "@";
   private readonly GROUND_CHAR = "x";
   private readonly SINGLE_LETTER_GRID_ROW_LENGTH = 8;
-  private readonly LEVEL_TOP_PADDING = 10;
-  private readonly LETTER_HEIGHT = 5;
-  private readonly BELOW_GROUND = 2;
-  private readonly COLUMN_HEIGHT = this.LETTER_HEIGHT + this.LEVEL_TOP_PADDING + this.BELOW_GROUND + 1;
+  private readonly ROWS_ABOVE_LETTER = 18;
+  private readonly ROWS_BELOW_GROUND = 6;
+  private readonly STATIC_MAP_ROWS = [
+    "                                      x!!x                                 ",
+    "                                      x!!x                                 ",
+    "                                      x!!xxxxxxxxxx                        ",
+    "                                      xx!!!!!!!!!!xx                       ",
+    "                                       xxxxxxxxxx!!x                       ",
+    "                                                xx!x                       ",
+    "                                                 x!x                       ",
+    "                                                 xvx                       ",
+    "                                                                           ",
+    "                                                                           ",
+    "                                                                           ",
+    "                                               x     x                     ",
+    "                                               x     x                     ",
+    "                                               x     x                     ",
+    "                                               x     x                     ",
+    "                                               xx    x                     ",
+    "                                               x     x      o  o           ",
+    "               xxxxxxx        xxx   xxx        x     x                     ",
+    "              xx     xx         x   x          x     x     xxxxxx          ",
+    "             xx       xx        x o x          x    xx                     ",
+    "     @       x         x        x   x          x     x                     ",
+    "    xxx      x         x        x   x          x     x                     ",
+    "    x x      x         x       xx o xx         x     x                     ",
+    "!!!!x x!!!!!!x         x!!!!!!xx     xx!!!!!!!!xx    x!!!!!!!!!!           ",
+    "!!!!x x!!!!!!x         x!!!!!xx       xxxxxxxxxx     x!!!!!!!xx!           ",
+    "!!!!x x!!!!!!x         x!!!!!x    o                 xx!!!!!!xx !           ",
+    "!!!!x x!!!!!!x         x!!!!!x                     xx!!!!!!xx  !           ",
+    "!!!!x x!!!!!!x         x!!!!!xx       xxxxxxxxxxxxxx!!!!!!xx   !           ",
+    "!!!!x x!!!!!!x         x!!!!!!xxxxxxxxx!!!!!!!!!!!!!!!!!!xx    !           ",
+    "!!!!x x!!!!!!x         x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xx     !           ",
+  ];
+  private readonly COLUMN_HEIGHT = this.STATIC_MAP_ROWS.length;
 
-  // TODO: Prepend or append a static map fraction to the end of the map with a climbing challenge
   generateLevelFromString(inputString: string): string[] {
     const concatenatedLetterGrids = this.concatLetterGrids(inputString);
 
-    const rowAboveGround = concatenatedLetterGrids[concatenatedLetterGrids.length - this.BELOW_GROUND - 1 - 1];
-    const rowAboveGroundCharacters = [...rowAboveGround];
-    rowAboveGroundCharacters[0] = this.PLAYER_CHAR;
-    concatenatedLetterGrids[concatenatedLetterGrids.length - this.BELOW_GROUND - 1 - 1] =
-      rowAboveGroundCharacters.join("");
+    const staticMapRows = this.STATIC_MAP_ROWS;
+    for (let currentRow = 0; currentRow < concatenatedLetterGrids.length; currentRow++) {
+      concatenatedLetterGrids[currentRow] = staticMapRows[currentRow].concat(concatenatedLetterGrids[currentRow]);
+    }
 
     return concatenatedLetterGrids;
   }
@@ -50,18 +78,22 @@ class LevelGenerator {
   private appendLavaCrack(letterGrid: string[]) {
     letterGrid.push("x      x");
     letterGrid.push("x!!!!!!x");
+    letterGrid.push("x!!!!!!x");
+    letterGrid.push("x!!!!!!x");
     letterGrid.push("xxxxxxxx");
+    letterGrid.push("        ");
+    letterGrid.push("        ");
   }
 
   private appendGroundAndBelowGroundRows(letterGrid: string[]) {
     letterGrid.push(this.GROUND_CHAR.repeat(this.SINGLE_LETTER_GRID_ROW_LENGTH));
-    for (let i = 0; i < this.BELOW_GROUND; i++) {
+    for (let i = 0; i < this.ROWS_BELOW_GROUND; i++) {
       letterGrid.push(" ".repeat(this.SINGLE_LETTER_GRID_ROW_LENGTH));
     }
   }
 
   private prependEmptyRowsOnTopOfLetter(letterGrid: string[]) {
-    for (let i = 0; i < this.LEVEL_TOP_PADDING; i++) {
+    for (let i = 0; i < this.ROWS_ABOVE_LETTER; i++) {
       letterGrid.unshift(" ".repeat(this.SINGLE_LETTER_GRID_ROW_LENGTH));
     }
   }
@@ -75,6 +107,14 @@ class LevelGenerator {
     letterGrid.unshift("  xx!xx ");
     letterGrid.unshift("  x!!!x ");
     letterGrid.unshift("  x   x ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
     letterGrid.unshift("        ");
     letterGrid.unshift("        ");
   }
