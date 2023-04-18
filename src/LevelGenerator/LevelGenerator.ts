@@ -74,8 +74,8 @@ class LevelGenerator {
     letterGrid.unshift("   xvx  ");
     letterGrid.unshift("  xx!xx ");
     letterGrid.unshift("  x!!!x ");
-    letterGrid.unshift("  xx!xx ");
-    letterGrid.unshift("   xxx  ");
+    letterGrid.unshift("  x   x ");
+    letterGrid.unshift("        ");
     letterGrid.unshift("        ");
   }
 }

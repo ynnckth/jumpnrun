@@ -11,8 +11,8 @@ describe(LevelGenerator.name, () => {
 
       expect(mapGrid).toStrictEqual([
         "                                                                                                                ",
-        "                                           xxx                                                                  ",
-        "                                          xx!xx                                                                 ",
+        "                                                                                                                ",
+        "                                          x   x                                                                 ",
         "                                          x!!!x                                                                 ",
         "                                          xx!xx                                                                 ",
         "                                           xvx                                                                  ",
@@ -37,8 +37,8 @@ describe(LevelGenerator.name, () => {
 
     expect(mapGrid).toStrictEqual([
       "                ",
-      "           xxx  ",
-      "          xx!xx ",
+      "                ",
+      "          x   x ",
       "          x!!!x ",
       "          xx!xx ",
       "           xvx  ",

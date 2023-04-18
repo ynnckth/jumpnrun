@@ -16,15 +16,13 @@ const trackDirections = (arrowKeyCodes) => {
     }
   };
 
-  const handleSwipeEnd = () => {
+  addEventListener("keydown", handleKeyPress);
+  addEventListener("keyup", handleKeyPress);
+  touchDetector.on("panend", () => {
     pressed["right"] = false;
     pressed["left"] = false;
     pressed["up"] = false;
-  };
-
-  addEventListener("keydown", handleKeyPress);
-  addEventListener("keyup", handleKeyPress);
-  touchDetector.on("panend", handleSwipeEnd);
+  });
   touchDetector.on("panup", () => {
     pressed["up"] = true;
   });
