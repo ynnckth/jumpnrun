@@ -1,4 +1,6 @@
-const urlQueryParams = new URL(window.location.toString()).searchParams;
+const urlQueryParams = new URL(window.location.toString());
+const message = urlQueryParams.searchParams.get("message") ?? "";
+const hash = urlQueryParams.hash ?? "";
 
-export const inputString = urlQueryParams.get("message") ?? "Hello World";
-export const winMessage = urlQueryParams.get("won") ?? "You won!";
+export const inputString = message || hash ? `${message}${hash}` : "Hello World";
+export const winMessage = urlQueryParams.searchParams.get("won") ?? "You won!";
