@@ -1,5 +1,13 @@
 export const stringLetterToGridLetterMappings: Record<string, string[]> = {
   // prettier-ignore
+  "#": [
+    "   o  o ",
+    " ooooooo",
+    "  o  o  ",
+    "ooooooo ",
+    " o  o   "
+  ],
+  // prettier-ignore
   "H": [
         "  o  o  ",
         "  o  o  ",
