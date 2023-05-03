@@ -214,7 +214,7 @@ export const stringLetterToGridLetterMappings: Record<string, string[]> = {
         "   oo   ",
         "  o  o  ",
         " o    o "
-    ],
+  ],
   // prettier-ignore
   "Z": [
         "  ooooo ",
@@ -222,5 +222,29 @@ export const stringLetterToGridLetterMappings: Record<string, string[]> = {
         "    o   ",
         "   o    ",
         "  ooooo "
-    ],
+  ],
+  // prettier-ignore
+  "0": [
+        " oooooo ",
+        " o    o ",
+        " o    o ",
+        " o    o ",
+        " oooooo "
+  ],
+  // prettier-ignore
+  "3": [
+        " oooooo ",
+        "      o ",
+        "  ooooo ",
+        "      o ",
+        " oooooo "
+  ],
+  // prettier-ignore
+  "!": [
+        "   oo   ",
+        "   oo   ",
+        "   oo   ",
+        "        ",
+        "   oo   "
+  ],
 };
