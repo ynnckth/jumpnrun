@@ -21,7 +21,7 @@ class LevelGenerator {
     "                                               x     x                 ",
     "                                               x     x                 ",
     "                                               x     x                 ",
-    "                                               xx    x                 ",
+    "                                               xx    x             xx  ",
     "                                               x     x      o  o       ",
     "               xxxxxxx        xxx   xxx        x     x                 ",
     "              xx     xx         x   x          x     x     xxxxxx      ",
