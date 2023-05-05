@@ -1,53 +1,31 @@
 import { stringLetterToGridLetterMappings } from "./stringLetterToGridLetterMappings";
+import { END_MAP_FRAGMENT_ROWS, START_MAP_FRAGMENT_ROWS } from "./fixedMapFragments";
 
 class LevelGenerator {
   private readonly GROUND_CHAR = "x";
   private readonly SINGLE_LETTER_GRID_ROW_LENGTH = 8;
-  private readonly ROWS_ABOVE_LETTER = 18;
+  private readonly ROWS_ABOVE_LETTER = 24;
   private readonly ROWS_BELOW_GROUND = 6;
-  private readonly STATIC_MAP_ROWS = [
-    "                                      x!!x                             ",
-    "                                      x!!x                             ",
-    "                                      x!!xxxxxxxxxx                    ",
-    "                                      xx!!!!!!!!!!xx                   ",
-    "                                       xxxxxxxxxx!!x                   ",
-    "                                                xx!x                   ",
-    "                                                 x!x                   ",
-    "                                                 xvx                   ",
-    "                                                                       ",
-    "                                                                       ",
-    "                                                                       ",
-    "                                               x     x                 ",
-    "                                               x     x                 ",
-    "                                               x     x                 ",
-    "                                               x     x                 ",
-    "                                               xx    x             xx  ",
-    "                                               x     x      o  o       ",
-    "               xxxxxxx        xxx   xxx        x     x                 ",
-    "              xx     xx         x   x          x     x     xxxxxx      ",
-    "             xx       xx        x o x          x    xx                 ",
-    "     @       x         x        x   x          x     x                 ",
-    "    xxx      x         x        x   x          x     x                 ",
-    "    x x      x         x       xx o xx         x     x                 ",
-    "!!!!x x!!!!!!x         x!!!!!!xx     xx!!!!!!!!xx    x!!!!!!!!!!       ",
-    "!!!!x x!!!!!!x         x!!!!!xx       xxxxxxxxxx     x!!!!!!!xx!       ",
-    "!!!!x x!!!!!!x         x!!!!!x    o                 xx!!!!!!xx !       ",
-    "!!!!x x!!!!!!x         x!!!!!x                     xx!!!!!!xx  !       ",
-    "!!!!x x!!!!!!x         x!!!!!xx       xxxxxxxxxxxxxx!!!!!!xx   !       ",
-    "!!!!x x!!!!!!x         x!!!!!!xxxxxxxxx!!!!!!!!!!!!!!!!!!xx    !       ",
-    "!!!!x x!!!!!!x         x!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!xx     !       ",
-  ];
-  private readonly COLUMN_HEIGHT = this.STATIC_MAP_ROWS.length;
+  private readonly COLUMN_HEIGHT = START_MAP_FRAGMENT_ROWS.length;
 
   generateLevelFromString(inputString: string): string[] {
     const concatenatedLetterGrids = this.concatLetterGrids(inputString);
+    const mapWithPrependedStaticRows = this.prependStaticStartMapRows(concatenatedLetterGrids);
+    return this.appendStaticEndMapRows(mapWithPrependedStaticRows);
+  }
 
-    const staticMapRows = this.STATIC_MAP_ROWS;
-    for (let currentRow = 0; currentRow < concatenatedLetterGrids.length; currentRow++) {
-      concatenatedLetterGrids[currentRow] = staticMapRows[currentRow].concat(concatenatedLetterGrids[currentRow]);
+  private prependStaticStartMapRows(mapRows: string[]) {
+    for (let currentRow = 0; currentRow < mapRows.length; currentRow++) {
+      mapRows[currentRow] = START_MAP_FRAGMENT_ROWS[currentRow].concat(mapRows[currentRow]);
     }
+    return mapRows;
+  }
 
-    return concatenatedLetterGrids;
+  private appendStaticEndMapRows(mapRows: string[]) {
+    for (let currentRow = 0; currentRow < mapRows.length; currentRow++) {
+      mapRows[currentRow] = mapRows[currentRow].concat(END_MAP_FRAGMENT_ROWS[currentRow]);
+    }
+    return mapRows;
   }
 
   private concatLetterGrids(inputString: string): string[] {
@@ -107,6 +85,12 @@ class LevelGenerator {
     letterGrid.unshift("  xx!xx ");
     letterGrid.unshift("  x!!!x ");
     letterGrid.unshift("  x   x ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
+    letterGrid.unshift("        ");
     letterGrid.unshift("        ");
     letterGrid.unshift("        ");
     letterGrid.unshift("        ");
