@@ -1,4 +1,7 @@
 # Jump n' run!
+*A small jump & run platformer browser game with customized messages rendered on the map*
+
+<img src="docs/assets/screenshot.gif" width="600px" />
 
 ### Usage
 
