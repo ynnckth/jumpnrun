@@ -5,7 +5,7 @@ export const encoded = urlQueryParams.get("encoded") === "true"
 const getAndDecodeMessageFromParam = (paramName: string, defaultValue: string) => {
     if (encoded) {
         const encodedInputString = urlQueryParams.get(paramName);
-        return encodedInputString ? atob(encodedInputString) : defaultValue;
+        return encodedInputString ? window.atob(encodedInputString) : defaultValue;
     }
     return urlQueryParams.get(paramName) ?? defaultValue
 };
