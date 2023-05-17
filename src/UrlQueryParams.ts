@@ -7,7 +7,7 @@ const getAndDecodeMessageFromParam = (paramName: string, defaultValue: string) =
         const encodedInputString = urlQueryParams.get(paramName);
         return encodedInputString ? atob(encodedInputString) : defaultValue;
     }
-    return urlQueryParams.get("won") ?? defaultValue
+    return urlQueryParams.get(paramName) ?? defaultValue
 };
 export const getInputString = (): string => {
     return getAndDecodeMessageFromParam("message", "Hello World");
