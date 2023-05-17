@@ -1,6 +1,17 @@
-const urlQueryParams = new URL(window.location.toString());
-const message = urlQueryParams.searchParams.get("message") ?? "";
-const hash = urlQueryParams.hash ?? "";
+const urlQueryParams = new URL(window.location.toString()).searchParams;
 
-export const inputString = message || hash ? `${message}${hash}` : "Hello World";
-export const winMessage = urlQueryParams.searchParams.get("won") ?? "You won!";
+export const encoded = urlQueryParams.get("encoded") === "true"
+
+const getAndDecodeMessageFromParam = (paramName: string, defaultValue: string) => {
+    if (encoded) {
+        const encodedInputString = urlQueryParams.get(paramName);
+        return encodedInputString ? window.atob(encodedInputString) : defaultValue;
+    }
+    return urlQueryParams.get(paramName) ?? defaultValue
+};
+export const getInputString = (): string => {
+    return getAndDecodeMessageFromParam("message", "Hello World");
+}
+export const getWinMessage = (): string => {
+    return getAndDecodeMessageFromParam("won", "You won!");
+}

@@ -1,4 +1,7 @@
 # Jump n' run!
+*A small jump & run platformer browser game with customized messages rendered on the map*
+
+<img src="docs/assets/screenshot.gif" width="600px" />
 
 ### Usage
 
@@ -6,6 +9,7 @@ The following URL query parameters control the message shown as part of the map 
 ```
 ?message=<your message>
 ?won=<your message>
+?encoded=<decided if the above strings are base64 encoded>
 ```
 Simply append them to the URL, for example as such: 
 ```

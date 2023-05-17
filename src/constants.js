@@ -2,7 +2,7 @@ import { Player } from "./Player.js";
 import { Lava } from "./Lava.js";
 import { Coin } from "./Coin.js";
 import LevelGenerator from "./LevelGenerator/LevelGenerator";
-import { inputString } from "./UrlQueryParams.ts";
+import { getInputString } from "./UrlQueryParams.ts";
 
 export const scale = 15;
 export const maxStep = 0.05;
@@ -23,7 +23,7 @@ export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };
 
 const levelGenerator = new LevelGenerator();
 
-export const LEVELS = [levelGenerator.generateLevelFromString(inputString)];
+export const LEVELS = [levelGenerator.generateLevelFromString(getInputString())];
 
 // export const LEVELS = [
 //   [
