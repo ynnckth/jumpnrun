@@ -9,6 +9,7 @@ The following URL query parameters control the message shown as part of the map 
 ```
 ?message=<your message>
 ?won=<your message>
+?encoded=<decided if the above strings are base64 encoded>
 ```
 Simply append them to the URL, for example as such: 
 ```
