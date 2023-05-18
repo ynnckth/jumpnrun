@@ -9,7 +9,8 @@ The following URL query parameters control the message shown as part of the map 
 ```
 ?message=<your message as string or base64-encoded>
 ?won=<your message as string or base64-encoded>
-?encoded=<should be true if the messages above are provided encoded>
+?level=<level number (optional)>
+?encoded=<set this to true if the messages above are provided encoded (optional)>
 ```
 Simply append them to the URL, for example as such: 
 ```

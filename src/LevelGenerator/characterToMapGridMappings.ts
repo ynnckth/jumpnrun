@@ -1,4 +1,4 @@
-export const stringLetterToGridLetterMappings: Record<string, string[]> = {
+export const characterToMapGridMappings: Record<string, string[]> = {
   // prettier-ignore
   "#": [
     "   o  o ",
