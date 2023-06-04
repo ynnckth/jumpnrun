@@ -1,8 +1,8 @@
-import { Player } from "./Player.js";
-import { Lava } from "./Lava.js";
-import { Coin } from "./Coin.js";
+import { Player } from "./Player"
+import { Lava } from "./Lava";
 import LevelGenerator from "./LevelGenerator/LevelGenerator";
-import { getDesiredLevel, getInputString } from "./UrlQueryParams.ts";
+import { getDesiredLevel, getInputString } from "./UrlQueryParams";
+import {Coin} from "./Coin";
 
 export const scale = 15;
 export const maxStep = 0.05;
@@ -13,10 +13,10 @@ export const jumpSpeed = 17;
 // Note: uppercase words are used that means constructor are values
 export const actorchars = {
   "@": Player,
-  o: Coin,
+  "o": Coin,
   "=": Lava, // horizontally looping lava
   "|": Lava, // vertically looping lava
-  v: Lava, // falling lava
+  "v": Lava, // falling lava
 };
 
 export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };

@@ -1,14 +1,20 @@
-import {Vector} from './Vector.js';
-import { gravity, playerXSpeed, jumpSpeed } from './constants.js';
+import {Vector} from "./Vector";
+import {gravity, jumpSpeed, playerXSpeed} from "./constants";
+import {Level} from "./Level";
+import {Actor} from "./Actor";
 
-export class Player {
-    constructor(pos) {
+export class Player implements Actor {
+    type = 'player'
+    pos: Vector;
+    size: Vector;
+    private speed: Vector;
+    constructor(pos: Vector) {
         this.pos = pos.plus(new Vector(0, -.5));
         this.size = new Vector(.5, 1);
         this.speed = new Vector(0, 0);
     }
 
-    moveX(step, level, keys) {
+    moveX(step: number, level: Level, keys: any) {
         this.speed.x = 0;
         if (keys.left)
             this.speed.x -= playerXSpeed;
@@ -25,7 +31,7 @@ export class Player {
             this.pos = newPos;
     }
 
-    moveY(step, level, keys) {
+    moveY(step: number, level: Level, keys: any){
         this.speed.y += step * gravity;
         const motion = new Vector(0, this.speed.y * step);
         const newPos = this.pos.plus(motion);
@@ -42,7 +48,7 @@ export class Player {
         }
     }
     
-    act(step, level, keys) {
+    act(step: number, level: Level, keys: any) {
         this.moveX(step, level, keys);
         this.moveY(step, level, keys);
 
@@ -58,4 +64,3 @@ export class Player {
         }
     }
 }
-Player.prototype.type = "player";

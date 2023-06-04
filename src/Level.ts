@@ -1,8 +1,17 @@
-import { Vector } from './Vector.js';
-import { maxStep, actorchars } from './constants.js';
+import { maxStep, actorchars } from './constants';
+import {Vector} from "./Vector";
+import {Player} from "./Player";
+import {Actor} from "./Actor";
 
 export class Level {
-    constructor(level) {
+    public player: Player;
+    public status: string | null;
+    public width: number;
+    public height: number;
+    public grid: any[];
+    public actors: Actor[];
+    private finishDelay: number | null;
+    constructor(level: string[]) {
         this.width = level[0].length;
         this.height = level.length;
         this.grid = [];
@@ -12,6 +21,7 @@ export class Level {
             const line = level[y], gridLine = [];
             for (let x = 0; x < this.width; x++) {
                 let ch = line[x], fieldType = null;
+                // @ts-ignore
                 const Actor = actorchars[ch];
                 if (Actor)
                     this.actors.push(new Actor(new Vector(x, y), ch));
@@ -25,7 +35,6 @@ export class Level {
                     fieldType = "lava";
                 else if (ch === "v") {
                     fieldType = "lava";
-                    console.log(fieldType);
                 }
                 gridLine.push(fieldType);
             }
@@ -33,13 +42,15 @@ export class Level {
         }
         this.player = this.actors.filter((actor) => {
             return actor.type === "player";
-        })[0];
+        })[0] as Player;
+
         this.status = this.finishDelay = null;
     }
     isFinished() {
+        // @ts-ignore
         return this.status != null && this.finishDelay < 0;
     }
-    obstacleAt(pos, size) {
+    obstacleAt(pos: Vector, size: Vector) {
         const xStart = Math.floor(pos.x);
         const xEnd = Math.ceil(pos.x + size.x);
         const yStart = Math.floor(pos.y);
@@ -57,7 +68,7 @@ export class Level {
             }
         }
     }
-    actorAt(actor) {
+    actorAt(actor: Actor) {
         for (let i = 0; i < this.actors.length; i++) {
             const other = this.actors[i];
             if (other != actor &&
@@ -67,10 +78,13 @@ export class Level {
                 actor.pos.y < other.pos.y + other.size.y)
                 return other;
         }
+        return undefined;
     }
-    animate(step, keys) {
+    animate(step: number, keys: any) {
         if (this.status != null)
-            this.finishDelay -= step;
+            { // @ts-ignore
+                this.finishDelay -= step;
+            }
 
         while (step > 0) {
             const thisStep = Math.min(step, maxStep);
@@ -80,7 +94,7 @@ export class Level {
             step -= thisStep;
         }
     }
-    playerTouched(type, actor) {
+    playerTouched(type: string, actor?: Actor) {
         if (type == "lava" || type == "Lava" && this.status == null) {
             this.status = "lost";
             this.finishDelay = 1;
