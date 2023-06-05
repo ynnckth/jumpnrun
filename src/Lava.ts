@@ -21,7 +21,6 @@ export class Lava implements Actor {
             this.repeatPos = pos;
         }
         else {
-            console.log(direction);
             throw new Error('Lava type not supported');
         }
     }
