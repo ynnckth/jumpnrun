@@ -1,4 +1,4 @@
-import { maxStep, actorchars } from './constants';
+import { maxStep, actorFactories } from './constants';
 import {Vector} from "./Vector";
 import {Player} from "./Player";
 import {Actor} from "./Actor";
@@ -21,10 +21,9 @@ export class Level {
             const line = level[y], gridLine = [];
             for (let x = 0; x < this.width; x++) {
                 let ch = line[x], fieldType = null;
-                // @ts-ignore
-                const Actor = actorchars[ch];
-                if (Actor)
-                    this.actors.push(new Actor(new Vector(x, y), ch));
+                const actorFactory = actorFactories[ch];
+                if (actorFactory)
+                    this.actors.push(actorFactory(new Vector(x, y)));
                 else if (ch === "x")
                     fieldType = "wall";
                 else if (ch === "!")
