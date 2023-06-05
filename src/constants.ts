@@ -16,6 +16,7 @@ export const enum LavaDirection {
   Horizontally,
   Vertically,
   Falling,
+  Static,
 }
 
 // Note: uppercase words are used that means constructor are values
@@ -24,6 +25,7 @@ export const actorFactories: Record<string, (position: Vector) => Actor> = {
   "o": (position) => new Coin(position),
   "=": (position) => new Lava(position, LavaDirection.Horizontally),
   "|": (position) => new Lava(position, LavaDirection.Vertically),
+  "!": (position) => new Lava(position, LavaDirection.Static),
   "v": (position) => new Lava(position, LavaDirection.Falling),
 };
 

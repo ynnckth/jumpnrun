@@ -26,15 +26,6 @@ export class Level {
                     this.actors.push(actorFactory(new Vector(x, y)));
                 else if (ch === "x")
                     fieldType = "wall";
-                else if (ch === "!")
-                    fieldType = "lava";
-                else if (ch === "|")
-                    fieldType = "lava";
-                else if (ch === "=")
-                    fieldType = "lava";
-                else if (ch === "v") {
-                    fieldType = "lava";
-                }
                 gridLine.push(fieldType);
             }
             this.grid.push(gridLine);
