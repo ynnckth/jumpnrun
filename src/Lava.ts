@@ -1,7 +1,14 @@
-import { Vector } from './Vector.js';
+import {Vector} from "./Vector";
+import {Level} from "./Level";
+import {Actor} from "./Actor";
 
-export class Lava {
-    constructor(pos, ch) {
+export class Lava implements Actor {
+    type = 'Lava'
+    public pos: Vector;
+    public size: Vector
+    private speed: Vector;
+    public repeatPos: Vector | undefined;
+    constructor(pos: Vector, ch: string) {
         this.pos = pos;
         this.size = new Vector(1, 1);
         if (ch === "=")
@@ -12,8 +19,11 @@ export class Lava {
             this.speed = new Vector(0, 3);
             this.repeatPos = pos;
         }
+        else {
+            this.speed = new Vector(0, 0);
+        }
     }
-    act(step, level) {
+    act(step: number, level: Level) {
         const newPos = this.pos.plus(this.speed.times(step));
         if (!level.obstacleAt(newPos, this.size))
             this.pos = newPos;
@@ -23,4 +33,3 @@ export class Lava {
             this.speed = this.speed.times(-1);
     }
 }
-Lava.prototype.type = "Lava";

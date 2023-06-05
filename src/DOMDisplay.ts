@@ -1,13 +1,17 @@
-import { scale } from './constants.js';
+import {Level} from "./Level";
+import {scale} from "./constants";
 
-const createElement = (name, className) => {
+const createElement = (name: string, className?: string) => {
     const elem = document.createElement(name);
     if(className) elem.className = className;
     return elem;
 }
 
 export class DOMDisplay {
-    constructor(parent, level) {
+    public level: Level;
+    public wrap: HTMLElement;
+    public actorLayer: HTMLElement | null;
+    constructor(parent: any, level: Level) {
         this.wrap = parent.appendChild(createElement("div", "game"));
         this.level = level;
 
@@ -22,7 +26,7 @@ export class DOMDisplay {
         this.level.grid.forEach(function (row) {
             var rowElement = table.appendChild(createElement("tr"));
             rowElement.style.height = scale + "px";
-            row.forEach(function (type) {
+            row.forEach(function (type: string) {
                 rowElement.appendChild(createElement("td", type));
             });
         });
@@ -70,6 +74,6 @@ export class DOMDisplay {
             this.wrap.scrollTop = center.y + margin - height;
     }
     clear() {
-        this.wrap.parentNode.removeChild(this.wrap);
+        this.wrap.parentNode?.removeChild(this.wrap);
     }
 }

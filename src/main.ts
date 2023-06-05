@@ -1,15 +1,16 @@
-import { arrowKeyCodes, LEVELS } from "./constants.js";
-import { Level } from "./Level.js";
-import { DOMDisplay } from "./DOMDisplay.js";
-import { getWinMessage } from "./UrlQueryParams.ts";
+import { arrowKeyCodes, LEVELS } from "./constants";
+import { Level } from "./Level";
+import { DOMDisplay } from "./DOMDisplay";
+import { getWinMessage } from "./UrlQueryParams";
 import Hammer from "hammerjs";
+
 
 const touchDetector = new Hammer(document.getElementsByTagName("html")[0]);
 
-const trackDirections = (arrowKeyCodes) => {
+const trackDirections = (arrowKeyCodes: any) => {
   const pressed = Object.create(null);
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: any) => {
     if (arrowKeyCodes.hasOwnProperty(event.keyCode)) {
       pressed[arrowKeyCodes[event.keyCode]] = event.type === "keydown";
       event.preventDefault();
@@ -37,9 +38,9 @@ const trackDirections = (arrowKeyCodes) => {
   return pressed;
 };
 
-const runAnimation = (frameFunc) => {
-  let lastTime = null;
-  const frame = (time) => {
+const runAnimation = (frameFunc: (step: number) => boolean | undefined) => {
+  let lastTime: number | null = null;
+  const frame = (time: number) => {
     let stop = false;
     if (lastTime != null) {
       const timeStep = Math.min(time - lastTime, 100) / 1000;
@@ -53,7 +54,7 @@ const runAnimation = (frameFunc) => {
 
 const arrows = trackDirections(arrowKeyCodes);
 
-const runLevel = (level, Display, andThen) => {
+const runLevel = (level: Level, Display: any, andThen: (status: string | null) => void) => {
   const display = new Display(document.body, level);
   runAnimation((step) => {
     level.animate(step, arrows);
@@ -63,12 +64,13 @@ const runLevel = (level, Display, andThen) => {
       if (andThen) andThen(level.status);
       return false;
     }
+    return undefined;
   });
 };
 
-const runGame = (levels, Display) => {
-  const startLevel = (n) => {
-    runLevel(new Level(levels[n]), Display, (status) => {
+const runGame = (levels: string[][], Display: any) => {
+  const startLevel = (n: number) => {
+    runLevel(new Level(levels[n]), Display, (status: string | null) => {
       if (status === "lost") startLevel(n);
       else if (n < levels.length - 1) startLevel(n + 1);
       else alert(getWinMessage());
