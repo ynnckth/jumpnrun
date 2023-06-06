@@ -1,6 +1,7 @@
 import {Vector} from "./Vector";
 import {Level} from "./Level";
 import {Actor} from "./Actor";
+import {LavaDirection} from "./constants";
 
 export class Lava implements Actor {
     type = 'Lava'
@@ -8,22 +9,31 @@ export class Lava implements Actor {
     public size: Vector
     private speed: Vector;
     public repeatPos: Vector | undefined;
-    constructor(pos: Vector, ch: string) {
+    private readonly direction: LavaDirection;
+    constructor(pos: Vector, direction: LavaDirection) {
+        this.direction = direction;
         this.pos = pos;
         this.size = new Vector(1, 1);
-        if (ch === "=")
+        if (direction === LavaDirection.Horizontally)
             this.speed = new Vector(2, 0);
-        else if (ch === '|')
+        else if (direction === LavaDirection.Vertically)
             this.speed = new Vector(0, 2);
-        else if (ch === 'v') {
+        else if (direction === LavaDirection.Falling) {
             this.speed = new Vector(0, 3);
             this.repeatPos = pos;
+        } else if (direction === LavaDirection.Static) {
+            this.speed = new Vector(0, 0);
+            return;
         }
         else {
-            this.speed = new Vector(0, 0);
+            throw new Error('Lava type not supported');
         }
     }
     act(step: number, level: Level) {
+        if (this.direction === LavaDirection.Static) {
+            return;
+        }
+
         const newPos = this.pos.plus(this.speed.times(step));
         if (!level.obstacleAt(newPos, this.size))
             this.pos = newPos;

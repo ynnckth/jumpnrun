@@ -38,13 +38,13 @@ const trackDirections = (arrowKeyCodes: any) => {
   return pressed;
 };
 
-const runAnimation = (frameFunc: (step: number) => boolean | undefined) => {
+const runAnimation = (frameFunc: (step: number) => boolean) => {
   let lastTime: number | null = null;
   const frame = (time: number) => {
     let stop = false;
     if (lastTime != null) {
       const timeStep = Math.min(time - lastTime, 100) / 1000;
-      stop = frameFunc(timeStep) === false;
+      stop = !frameFunc(timeStep);
     }
     lastTime = time;
     if (!stop) requestAnimationFrame(frame);
@@ -54,23 +54,23 @@ const runAnimation = (frameFunc: (step: number) => boolean | undefined) => {
 
 const arrows = trackDirections(arrowKeyCodes);
 
-const runLevel = (level: Level, Display: any, andThen: (status: string | null) => void) => {
-  const display = new Display(document.body, level);
+const runLevel = (level: Level, andThen: (status: string | null) => void) => {
+  const display = new DOMDisplay(document.body, level);
   runAnimation((step) => {
     level.animate(step, arrows);
-    display.drawFrame(step);
+    display.drawFrame();
     if (level.isFinished()) {
       display.clear();
       if (andThen) andThen(level.status);
       return false;
     }
-    return undefined;
+    return true;
   });
 };
 
-const runGame = (levels: string[][], Display: any) => {
+const runGame = (levels: string[][]) => {
   const startLevel = (n: number) => {
-    runLevel(new Level(levels[n]), Display, (status: string | null) => {
+    runLevel(new Level(levels[n]), (status: string | null) => {
       if (status === "lost") startLevel(n);
       else if (n < levels.length - 1) startLevel(n + 1);
       else alert(getWinMessage());
@@ -79,4 +79,4 @@ const runGame = (levels: string[][], Display: any) => {
   startLevel(0);
 };
 
-runGame(LEVELS, DOMDisplay);
+runGame(LEVELS);

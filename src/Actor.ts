@@ -5,5 +5,5 @@ export interface Actor {
     type: string;
     pos: Vector;
     size: Vector;
-    act(step: number, level: Level, keys?: any): void;
+    act(step: number, level?: Level, keys?: any): void;
 }

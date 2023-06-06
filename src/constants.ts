@@ -3,6 +3,8 @@ import { Lava } from "./Lava";
 import LevelGenerator from "./LevelGenerator/LevelGenerator";
 import { getDesiredLevel, getInputString } from "./UrlQueryParams";
 import {Coin} from "./Coin";
+import {Actor} from "./Actor";
+import {Vector} from "./Vector";
 
 export const scale = 15;
 export const maxStep = 0.05;
@@ -10,13 +12,21 @@ export const playerXSpeed = 10;
 export const gravity = 30;
 export const jumpSpeed = 17;
 
+export const enum LavaDirection {
+  Horizontally,
+  Vertically,
+  Falling,
+  Static,
+}
+
 // Note: uppercase words are used that means constructor are values
-export const actorchars = {
-  "@": Player,
-  "o": Coin,
-  "=": Lava, // horizontally looping lava
-  "|": Lava, // vertically looping lava
-  "v": Lava, // falling lava
+export const actorFactories: Record<string, (position: Vector) => Actor> = {
+  "@": (position) => new Player(position),
+  "o": (position) => new Coin(position),
+  "=": (position) => new Lava(position, LavaDirection.Horizontally),
+  "|": (position) => new Lava(position, LavaDirection.Vertically),
+  "!": (position) => new Lava(position, LavaDirection.Static),
+  "v": (position) => new Lava(position, LavaDirection.Falling),
 };
 
 export const arrowKeyCodes = { 37: "left", 38: "up", 39: "right" };

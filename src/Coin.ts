@@ -1,9 +1,10 @@
 import { Vector } from './Vector';
+import {Actor} from "./Actor";
 
 const WOBBLE_SPEED = 8;
 const WOBBLE_DISTANCE = 0.07;
 
-export class Coin {
+export class Coin implements Actor {
     type = 'coin'
     public pos: Vector;
     public size: Vector;
