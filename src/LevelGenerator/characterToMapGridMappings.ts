@@ -247,6 +247,13 @@ export const characterToMapGridMappings: Record<string, string[]> = {
         "      o ",
         "  ooooo "
   ],
+  "4": [
+        "  o   o ",
+        "  o   o ",
+        "  ooooo ",
+        "      o ",
+        "      o "
+  ],
   // prettier-ignore
   "!": [
         "   oo   ",
